@@ -49,6 +49,23 @@ class RepositoryTest {
     }
 
     @Test
+    void theIncludedBooksAreALibraryFolderUntilTheReaderRemovesThem() throws Exception {
+        Path file = dir.resolve("books.properties");
+        Path included = Files.createDirectories(dir.resolve("usr/share/amadeos/books"));
+        BooksPreferences p = new BooksPreferences(file, dir.resolve("Books"), included);
+        assertEquals(List.of(dir.resolve("Books"), included), p.folders());
+        assertEquals(dir.resolve("Books"), p.mainFolder());
+        // new books are never copied into the system's folder
+        p.setFolders(List.of(included));
+        assertEquals(dir.resolve("Books"), p.mainFolder());
+        p.setFolders(List.of(dir.resolve("Books")));
+        assertEquals(List.of(dir.resolve("Books")), new BooksPreferences(file, dir.resolve("Books"), included).folders());
+        // not installed: only ~/Books
+        assertEquals(List.of(dir.resolve("Books")),
+                new BooksPreferences(dir.resolve("other.properties"), dir.resolve("Books"), dir.resolve("missing")).folders());
+    }
+
+    @Test
     void readingStatesRoundTrip() throws Exception {
         Path file = dir.resolve("data/library.json");
         ReadingStates states = new ReadingStates(file);

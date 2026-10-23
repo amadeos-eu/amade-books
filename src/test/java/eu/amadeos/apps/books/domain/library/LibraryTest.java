@@ -60,6 +60,24 @@ class LibraryTest {
     // --8<-- [end:shelf]
 
     @Test
+    void theBooksThatComeWithTheSystemHaveTheirOwnGroup() {
+        Path included = Path.of("/usr/share/amadeos/books");
+        LibraryEntry own = entry("Alice", "Lewis Carroll", BookFormat.EPUB, "", 0, List.of(), 1);
+        LibraryEntry shipped = new LibraryEntry(new BookInfo(included.resolve("de/die-verwandlung.epub"), BookFormat.EPUB,
+                "Die Verwandlung", List.of("Franz Kafka"), "", 0, List.of(), "de"), 1, 1, 2, Optional.empty());
+        ShelfFilter group = ShelfFilter.of(ShelfFilter.Kind.INCLUDED);
+        Map<ShelfFilter, Integer> facets = new Shelf(List.of(own, shipped), e -> BookState.NEW, Locale.GERMAN, included).facets();
+        assertEquals(1, facets.get(group));
+        assertEquals(List.of(ShelfFilter.Kind.FINISHED, ShelfFilter.Kind.INCLUDED, ShelfFilter.Kind.BOOKS),
+                facets.keySet().stream().map(ShelfFilter::kind).toList().subList(3, 6));
+        assertEquals(List.of(shipped), new Shelf(List.of(own, shipped), e -> BookState.NEW, Locale.GERMAN, included)
+                .books(group, "", SortOrder.TITLE));
+        // without such books the group is not shown
+        assertTrue(new Shelf(List.of(own), e -> BookState.NEW, Locale.GERMAN, included).facets().keySet().stream()
+                .noneMatch(f -> f.kind() == ShelfFilter.Kind.INCLUDED));
+    }
+
+    @Test
     void bookStates() {
         BookState s = BookState.NEW.read(new Position(2, 40), 0.3, 1000);
         assertTrue(s.reading());

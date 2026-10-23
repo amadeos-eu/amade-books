@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public record ShelfFilter(Kind kind, String value) {
     public enum Kind {
-        ALL, READING, NOT_STARTED, FINISHED, BOOKS, COMICS, GENRE, AUTHOR, SERIES, COLLECTION
+        ALL, READING, NOT_STARTED, FINISHED, INCLUDED, BOOKS, COMICS, GENRE, AUTHOR, SERIES, COLLECTION
     }
 
     public static final ShelfFilter ALL = new ShelfFilter(Kind.ALL, "");
