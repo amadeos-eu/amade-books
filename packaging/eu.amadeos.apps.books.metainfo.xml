@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AppStream metadata of amade-books, installed as /usr/share/metainfo/eu.amadeos.apps.books.metainfo.xml.
+     amadeOS Software shows it for the installed package; a repository's appstream-generator reads it too. -->
+<component type="desktop-application">
+  <id>eu.amadeos.apps.books</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>EUPL-1.2</project_license>
+
+  <name>amadeOS Books</name>
+  <name xml:lang="de">amadeOS Bücher</name>
+  <name xml:lang="fr">amadeOS Livres</name>
+  <name xml:lang="es">amadeOS Libros</name>
+  <name xml:lang="it">amadeOS Libri</name>
+
+  <summary>Read EPUB books and CBZ comics on a bookshelf of your own</summary>
+  <summary xml:lang="de">EPUB-Bücher und CBZ-Comics in einem eigenen Bücherregal lesen</summary>
+  <summary xml:lang="fr">Lire des livres EPUB et des BD CBZ dans votre propre bibliothèque</summary>
+  <summary xml:lang="es">Leer libros EPUB y cómics CBZ en una estantería propia</summary>
+  <summary xml:lang="it">Leggere libri EPUB e fumetti CBZ in una libreria tutta propria</summary>
+
+  <description>
+    <p>amade-books is the e-book and comic reader of the amadeOS desktop. It keeps your books on a shelf with their covers, sets EPUB books into pages with its own typesetter, shows comics page by page or as double pages, and remembers in every book where you stopped. It never goes online by itself.</p>
+    <p xml:lang="de">amade-books ist der E-Book- und Comic-Leser des amadeOS-Desktops. Er stellt Ihre Bücher mit ihren Umschlägen ins Regal, setzt EPUB-Bücher mit einem eigenen Satz in Seiten, zeigt Comics Seite für Seite oder als Doppelseite und merkt sich in jedem Buch, wo Sie aufgehört haben. Er geht nie von sich aus ins Internet.</p>
+    <p xml:lang="fr">amade-books est le lecteur de livres numériques et de BD du bureau amadeOS. Il range vos livres sur une étagère avec leurs couvertures, compose les livres EPUB en pages avec son propre moteur, affiche les BD page par page ou en double page et retient dans chaque livre l’endroit où vous vous êtes arrêté. Il ne se connecte jamais de lui-même à Internet.</p>
+    <p xml:lang="es">amade-books es el lector de libros electrónicos y cómics del escritorio amadeOS. Coloca sus libros en una estantería con sus portadas, compone los libros EPUB en páginas con su propio motor, muestra los cómics página a página o a doble página y recuerda en cada libro dónde se quedó. Nunca se conecta a Internet por su cuenta.</p>
+    <p xml:lang="it">amade-books è il lettore di libri elettronici e fumetti del desktop amadeOS. Mette i libri su uno scaffale con le loro copertine, compone i libri EPUB in pagine con il proprio motore, mostra i fumetti pagina per pagina o a doppia pagina e ricorda in ogni libro dove ci si è fermati. Non si collega mai a Internet da solo.</p>
+    <ul>
+      <li>A library of covers or a list, with shelves for reading state, format, genre, author, series and your own collections</li>
+      <li xml:lang="de">Eine Bibliothek aus Umschlägen oder als Liste, mit Regalen nach Lesestand, Format, Genre, Autor, Serie und eigenen Sammlungen</li>
+      <li xml:lang="fr">Une bibliothèque en couvertures ou en liste, avec des étagères par état de lecture, format, genre, auteur, série et vos propres collections</li>
+      <li xml:lang="es">Una biblioteca de portadas o en lista, con estantes por estado de lectura, formato, género, autor, serie y colecciones propias</li>
+      <li xml:lang="it">Una biblioteca di copertine o in elenco, con scaffali per stato di lettura, formato, genere, autore, serie e raccolte proprie</li>
+      <li>One or two pages, justified and hyphenated in the book's language, with pictures, text flowing around them and footnotes in a small window</li>
+      <li xml:lang="de">Eine oder zwei Seiten, im Blocksatz und mit Silbentrennung in der Sprache des Buchs, mit Bildern, Textumfluss und Fußnoten in einem kleinen Fenster</li>
+      <li xml:lang="fr">Une ou deux pages, justifiées et avec césure dans la langue du livre, avec images, habillage du texte et notes dans une petite fenêtre</li>
+      <li xml:lang="es">Una o dos páginas, justificadas y con separación silábica en el idioma del libro, con imágenes, texto alrededor de ellas y notas en una ventana pequeña</li>
+      <li xml:lang="it">Una o due pagine, giustificate e sillabate nella lingua del libro, con immagini, testo che scorre intorno e note in una piccola finestra</li>
+      <li>Font, size, line spacing and margins of your choice; paper, sepia and night colours; full screen</li>
+      <li xml:lang="de">Schrift, Größe, Zeilenabstand und Ränder nach Wahl; Farben Papier, Sepia und Nacht; Vollbild</li>
+      <li xml:lang="fr">Police, taille, interligne et marges au choix ; couleurs papier, sépia et nuit ; plein écran</li>
+      <li xml:lang="es">Letra, tamaño, interlineado y márgenes a elegir; colores papel, sepia y noche; pantalla completa</li>
+      <li xml:lang="it">Carattere, dimensione, interlinea e margini a scelta; colori carta, seppia e notte; schermo intero</li>
+      <li>Table of contents, bookmarks, search through the whole book and links inside the book</li>
+      <li xml:lang="de">Inhaltsverzeichnis, Lesezeichen, Suche im ganzen Buch und Verweise im Buch</li>
+      <li xml:lang="fr">Table des matières, signets, recherche dans tout le livre et liens dans le livre</li>
+      <li xml:lang="es">Índice, marcadores, búsqueda en todo el libro y enlaces dentro del libro</li>
+      <li xml:lang="it">Indice, segnalibri, ricerca in tutto il libro e collegamenti nel libro</li>
+      <li>Comics as CBZ with fit to page, width or height, zoom, double pages and right to left for manga</li>
+      <li xml:lang="de">Comics als CBZ mit Einpassen auf Seite, Breite oder Höhe, Zoom, Doppelseiten und von rechts nach links für Manga</li>
+      <li xml:lang="fr">BD au format CBZ avec ajustement à la page, à la largeur ou à la hauteur, zoom, double page et lecture de droite à gauche pour les mangas</li>
+      <li xml:lang="es">Cómics en CBZ con ajuste a la página, al ancho o al alto, zoom, doble página y de derecha a izquierda para manga</li>
+      <li xml:lang="it">Fumetti in CBZ con adattamento a pagina, larghezza o altezza, zoom, doppia pagina e da destra a sinistra per i manga</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">amade-books.desktop</launchable>
+  <icon type="stock">amade-books</icon>
+  <categories>
+    <category>Office</category>
+    <category>Viewer</category>
+  </categories>
+  <url type="homepage">https://github.com/datazuul/amade-books</url>
+  <url type="bugtracker">https://github.com/datazuul/amade-books/issues</url>
+  <developer id="eu.amadeos">
+    <name>amadeOS Project</name>
+  </developer>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>The library with covers and shelves</caption>
+      <caption xml:lang="de">Die Bibliothek mit Umschlägen und Regalen</caption>
+      <caption xml:lang="fr">La bibliothèque avec les couvertures et les étagères</caption>
+      <caption xml:lang="es">La biblioteca con portadas y estantes</caption>
+      <caption xml:lang="it">La biblioteca con copertine e scaffali</caption>
+      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>A book on two pages with its table of contents</caption>
+      <caption xml:lang="de">Ein Buch auf zwei Seiten mit Inhaltsverzeichnis</caption>
+      <caption xml:lang="fr">Un livre sur deux pages avec sa table des matières</caption>
+      <caption xml:lang="es">Un libro en dos páginas con su índice</caption>
+      <caption xml:lang="it">Un libro su due pagine con il suo indice</caption>
+      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books-reader.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Night colours and the appearance</caption>
+      <caption xml:lang="de">Nachtfarben und die Darstellung</caption>
+      <caption xml:lang="fr">Couleurs de nuit et l’apparence</caption>
+      <caption xml:lang="es">Colores de noche y la apariencia</caption>
+      <caption xml:lang="it">Colori notte e l’aspetto</caption>
+      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books-night.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>A manga, two pages read from right to left</caption>
+      <caption xml:lang="de">Ein Manga, zwei Seiten von rechts nach links gelesen</caption>
+      <caption xml:lang="fr">Un manga, deux pages lues de droite à gauche</caption>
+      <caption xml:lang="es">Un manga, dos páginas leídas de derecha a izquierda</caption>
+      <caption xml:lang="it">Un manga, due pagine lette da destra a sinistra</caption>
+      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books-comic.png</image>
+    </screenshot>
+  </screenshots>
+
+  <provides>
+    <binary>amade-books</binary>
+    <mediatype>application/epub+zip</mediatype>
+    <mediatype>application/vnd.comicbook+zip</mediatype>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>
