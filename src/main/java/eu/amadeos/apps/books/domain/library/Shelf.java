@@ -1,5 +1,6 @@
 package eu.amadeos.apps.books.domain.library;
 
+import java.nio.file.Path;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,12 +16,22 @@ import java.util.function.Function;
  * books a filter, a search and a sort order leave.
  */
 public final class Shelf {
+    /** Where the package amadeos-sample-books installs the books that come with amadeOS. */
+    public static final Path INCLUDED_FOLDER = Path.of("/usr/share/amadeos/books");
+
     private final List<LibraryEntry> entries;
     private final Function<LibraryEntry, BookState> states;
     private final Collator collator;
+    private final Path included;
 
     public Shelf(List<LibraryEntry> entries, Function<LibraryEntry, BookState> states, Locale locale) {
+        this(entries, states, locale, INCLUDED_FOLDER);
+    }
+
+    /** @param included the folder of the books that come with the system, shown as their own group */
+    public Shelf(List<LibraryEntry> entries, Function<LibraryEntry, BookState> states, Locale locale, Path included) {
         this.entries = List.copyOf(entries);
+        this.included = included;
         this.states = states;
         this.collator = Collator.getInstance(locale);
         collator.setStrength(Collator.PRIMARY);
@@ -38,6 +49,12 @@ public final class Shelf {
                 ShelfFilter.Kind.FINISHED, ShelfFilter.Kind.BOOKS, ShelfFilter.Kind.COMICS)) {
             ShelfFilter filter = ShelfFilter.of(kind);
             result.put(filter, (int) entries.stream().filter(e -> matches(e, filter)).count());
+            if (kind == ShelfFilter.Kind.FINISHED) {
+                // the books that come with amadeOS, only when there are some
+                ShelfFilter shipped = ShelfFilter.of(ShelfFilter.Kind.INCLUDED);
+                int count = (int) entries.stream().filter(e -> matches(e, shipped)).count();
+                if (count > 0) result.put(shipped, count);
+            }
         }
         facet(result, ShelfFilter.Kind.GENRE, e -> e.info().genres());
         facet(result, ShelfFilter.Kind.AUTHOR, e -> e.info().authors());
@@ -62,6 +79,7 @@ public final class Shelf {
             case READING -> s.reading();
             case NOT_STARTED -> !s.started() && !s.finished();
             case FINISHED -> s.finished();
+            case INCLUDED -> e.file().startsWith(included);
             case BOOKS -> !e.info().format().comic();
             case COMICS -> e.info().format().comic();
             case GENRE -> e.info().genres().stream().anyMatch(g -> collator.equals(g, filter.value()));

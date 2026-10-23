@@ -299,7 +299,7 @@ final class LibraryPanel extends JPanel {
     /** The section a sidebar line belongs to: the fixed groups under the library, the two formats together. */
     private static ShelfFilter.Kind heading(ShelfFilter.Kind kind) {
         return switch (kind) {
-            case ALL, READING, NOT_STARTED, FINISHED -> ShelfFilter.Kind.ALL;
+            case ALL, READING, NOT_STARTED, FINISHED, INCLUDED -> ShelfFilter.Kind.ALL;
             case BOOKS, COMICS -> ShelfFilter.Kind.BOOKS;
             default -> kind;
         };
@@ -322,6 +322,7 @@ final class LibraryPanel extends JPanel {
             case READING -> msg.get("filter.reading");
             case NOT_STARTED -> msg.get("filter.not-started");
             case FINISHED -> msg.get("filter.finished");
+            case INCLUDED -> msg.get("filter.included");
             case BOOKS -> msg.get("filter.books");
             case COMICS -> msg.get("filter.comics");
             default -> f.value();

@@ -5,10 +5,12 @@ import eu.amadeos.apps.books.domain.ComicFit;
 import eu.amadeos.apps.books.domain.ReadTheme;
 import eu.amadeos.apps.books.domain.Settings;
 import eu.amadeos.apps.books.domain.layout.Appearance;
+import eu.amadeos.apps.books.domain.library.Shelf;
 import eu.amadeos.apps.books.domain.library.SortOrder;
 import eu.amadeos.commons.config.AppDirectories;
 import eu.amadeos.commons.config.PropertiesFile;
 
+import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -28,16 +30,23 @@ public class BooksPreferences {
 
     private final Path file;
     private final Path defaultFolder;
+    private final Path includedFolder;
     private final Properties properties;
 
     @Inject
     public BooksPreferences(AppDirectories directories, @LibraryFolder Path defaultFolder) {
-        this(directories.configFile(FILE), defaultFolder);
+        this(directories.configFile(FILE), defaultFolder, Shelf.INCLUDED_FOLDER);
     }
 
     public BooksPreferences(Path file, Path defaultFolder) {
+        this(file, defaultFolder, null);
+    }
+
+    /** @param includedFolder the books that come with the system, a library folder until the reader removes it */
+    public BooksPreferences(Path file, Path defaultFolder, Path includedFolder) {
         this.file = Objects.requireNonNull(file, "file");
         this.defaultFolder = defaultFolder;
+        this.includedFolder = includedFolder;
         this.properties = PropertiesFile.load(file);
     }
 
@@ -83,11 +92,17 @@ public class BooksPreferences {
     }
     // --8<-- [end:appearance]
 
-    /** The folders the library shows; {@code ~/Books} when none were chosen. */
+    /**
+     * The folders the library shows; when none were chosen {@code ~/Books} and, if installed, the books that come
+     * with amadeOS.
+     */
     public List<Path> folders() {
         List<Path> folders = new ArrayList<>();
         for (int i = 0; i < 20; i++) path(get("folder." + i)).ifPresent(folders::add);
-        if (folders.isEmpty() && defaultFolder != null) folders.add(defaultFolder);
+        if (folders.isEmpty()) {
+            if (defaultFolder != null) folders.add(defaultFolder);
+            if (includedFolder != null && Files.isDirectory(includedFolder)) folders.add(includedFolder);
+        }
         return folders;
     }
 
@@ -99,9 +114,10 @@ public class BooksPreferences {
         save();
     }
 
-    /** The folder new books are copied to: the first library folder. */
+    /** The folder new books are copied to: the first library folder that is not the system's. */
     public Path mainFolder() {
-        return folders().isEmpty() ? defaultFolder : folders().getFirst();
+        return folders().stream().filter(f -> includedFolder == null || !f.startsWith(includedFolder)).findFirst()
+                .orElse(defaultFolder);
     }
 
     public Optional<Path> lastBook() {
