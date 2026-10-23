@@ -35,6 +35,8 @@ public final class ChapterParser {
     private final Deque<Style> blockStyles = new ArrayDeque<>();
     private final Deque<int[]> listCounters = new ArrayDeque<>();
     private final Deque<String> languages = new ArrayDeque<>();
+    /** For each {@code figure} or floating box around the current element: whether it had a picture yet. */
+    private final Deque<boolean[]> figures = new ArrayDeque<>();
     private final StringBuilder text = new StringBuilder();
     private final List<StyledRun> runs = new ArrayList<>();
     private boolean lastSpace = true;
@@ -144,6 +146,8 @@ public final class ChapterParser {
         if (style.breakBefore()) pendingBreak = true;
         blockStyles.push(style);
         boolean heading = tag.matches("h[1-6]");
+        boolean figure = tag.equals("figure") || !style.floating().equals("none");
+        if (figure) figures.push(new boolean[]{false});
         try {
             if (tag.equals("ol") || tag.equals("ul")) {
                 int start = 1;
@@ -170,6 +174,7 @@ public final class ChapterParser {
         } finally {
             blockStyles.pop();
             if (tag.equals("ol") || tag.equals("ul")) listCounters.pop();
+            if (figure) figures.pop();
         }
         pendingSpace = Math.max(pendingSpace, style.marginBottom());
     }
@@ -224,6 +229,7 @@ public final class ChapterParser {
                 style.height(), block.marginLeft(), block.marginRight(), pendingSpace, takeBreak(style)));
         plain.append(OBJECT).append('\n');
         pendingSpace = 0;
+        if (!figures.isEmpty()) figures.peek()[0] = true;
     }
 
     private boolean takeBreak(Style style) {
@@ -300,7 +306,8 @@ public final class ChapterParser {
         }
         blocks.add(new Block.Text(plain.length(), content, clipped, style.align(), style.indent(), style.marginLeft(),
                 style.marginRight(), pendingSpace, takeBreak(style), keepWithNext, style.preformatted(),
-                style.fontSize(), languages.isEmpty() ? bookLanguage : languages.peek()));
+                style.fontSize(), languages.isEmpty() ? bookLanguage : languages.peek(),
+                !figures.isEmpty() && figures.peek()[0]));
         plain.append(content).append('\n');
         pendingSpace = 0;
         text.setLength(0);

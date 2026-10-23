@@ -26,10 +26,12 @@ public sealed interface Block {
      * @param align        left, right, center or justify
      * @param keepWithNext a heading: not alone at the bottom of a page
      * @param language     the language for hyphenation, empty for the book's
+     * @param caption      the caption of the picture before it, in a {@code figure} or a floating box with the
+     *                     picture: the typesetter keeps the two together
      */
     record Text(int offset, String text, List<StyledRun> runs, String align, double indent, double left,
                 double right, double spaceBefore, boolean breakBefore, boolean keepWithNext, boolean preformatted,
-                double fontSize, String language) implements Block {
+                double fontSize, String language, boolean caption) implements Block {
         public Text {
             runs = List.copyOf(runs);
         }

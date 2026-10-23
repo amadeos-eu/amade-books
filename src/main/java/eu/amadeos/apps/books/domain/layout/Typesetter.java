@@ -68,7 +68,9 @@ public final class Typesetter {
         private List<Page.Picture> placed = new ArrayList<>();
         private List<Page.Rule> rules = new ArrayList<>();
         private final List<Float> floats = new ArrayList<>();
-        private final List<Block.Image> deferred = new ArrayList<>();
+        private final List<Figure> deferred = new ArrayList<>();
+        /** Pictures and captions moved to a later page, {from, to}: they do not count for where that page starts. */
+        private final List<int[]> moved = new ArrayList<>();
         private float y;
         private boolean empty = true;
         private int lastEnd;
@@ -82,12 +84,25 @@ public final class Typesetter {
         record Float(boolean left, float x, float top, float bottom, float width) {
         }
 
+        /** A picture with the captions that follow it. */
+        record Figure(Block.Image image, List<Block.Text> captions) {
+        }
+
         ChapterLayout set(ChapterText chapter) {
-            for (Block block : chapter.blocks()) {
+            List<Block> blocks = chapter.blocks();
+            for (int i = 0; i < blocks.size(); i++) {
+                Block block = blocks.get(i);
                 if (block.breakBefore() && !empty) newPage();
                 switch (block) {
                     case Block.Text t -> text(t);
-                    case Block.Image i -> picture(i, false);
+                    case Block.Image image -> {
+                        List<Block.Text> captions = new ArrayList<>();
+                        while (i + 1 < blocks.size() && blocks.get(i + 1) instanceof Block.Text t && t.caption()) {
+                            captions.add(t);
+                            i++;
+                        }
+                        picture(new Figure(image, captions), false);
+                    }
                     case Block.Rule r -> rule(r);
                 }
             }
@@ -107,9 +122,9 @@ public final class Typesetter {
             floats.clear();
             y = 0;
             empty = true;
-            List<Block.Image> waiting = new ArrayList<>(deferred);
+            List<Figure> waiting = new ArrayList<>(deferred);
             deferred.clear();
-            for (Block.Image image : waiting) picture(image, true);
+            for (Figure figure : waiting) picture(figure, true);
         }
 
         private void finishPage() {
@@ -117,10 +132,12 @@ public final class Typesetter {
             int start = Integer.MAX_VALUE;
             int end = 0;
             for (Page.Line l : lines) {
+                if (moved(l.start())) continue;
                 start = Math.min(start, l.start());
                 end = Math.max(end, l.end());
             }
             for (Page.Picture p : placed) {
+                if (moved(p.offset())) continue;
                 start = Math.min(start, p.offset());
                 end = Math.max(end, p.offset() + 1);
             }
@@ -144,7 +161,8 @@ public final class Typesetter {
         // ------------------------------------------------------------ pictures and rules
 
         // --8<-- [start:picture]
-        private void picture(Block.Image image, boolean pageTop) {
+        private void picture(Figure figure, boolean pageTop) {
+            Block.Image image = figure.image();
             Optional<Dimension> natural = pictures.size(image.path());
             if (natural.isEmpty()) return;
             float left = (float) (image.left() * em);
@@ -164,26 +182,75 @@ public final class Typesetter {
                 w = w * maxHeight / h;
                 h = maxHeight;
             }
+            float captionWidth = floating ? Math.max(w, 6 * em) : available;
+            List<List<TextLayout>> captions = new ArrayList<>();
+            float captionHeight = 0;
+            for (Block.Text caption : figure.captions()) {
+                List<TextLayout> captionLines = captionLines(caption, captionWidth);
+                captions.add(captionLines);
+                captionHeight += (float) (caption.spaceBefore() * em);
+                for (TextLayout l : captionLines) captionHeight += lineHeight(l);
+            }
             float top = y + (empty ? 0 : (float) (image.spaceBefore() * em));
             if (!floating) top = Math.max(top, floatBottom());
             else top = Math.max(top, floatBottom(image.floating().equals("left")));
-            if (top + h > height && !empty && !pageTop) {
-                // Does not fit any more: the text goes on here, the picture opens the next page.
-                deferred.add(image);
+            if (top + h + captionHeight > height && !empty && !pageTop) {
+                // Does not fit any more: the text goes on here, the picture and its caption open the next page.
+                deferred.add(figure);
+                Block last = figure.captions().isEmpty() ? image : figure.captions().getLast();
+                moved.add(new int[]{image.offset(), last.offset() + last.length()});
                 return;
             }
             float x = floating
                     ? (image.floating().equals("left") ? left : left + available - w)
                     : left + (available - w) / 2;
             placed.add(new Page.Picture(image.path(), image.alt(), x, top, w, h, image.offset()));
+            // the captions centred below the picture
+            float boxX = floating ? (image.floating().equals("left") ? left : left + available - captionWidth) : left;
+            float cy = top + h;
+            for (int c = 0; c < captions.size(); c++) {
+                Block.Text caption = figure.captions().get(c);
+                cy += (float) (caption.spaceBefore() * em);
+                int start = caption.offset();
+                for (TextLayout l : captions.get(c)) {
+                    float lh = lineHeight(l);
+                    int length = l.getCharacterCount();
+                    lines.add(new Page.Line(l, boxX + (captionWidth - l.getVisibleAdvance()) / 2,
+                            cy + l.getAscent() + (lh - l.getAscent() - l.getDescent()) / 2, start, start + length, false));
+                    start += length;
+                    cy += lh;
+                }
+            }
             if (floating) {
-                floats.add(new Float(image.floating().equals("left"), x, top, top + h, w));
+                floats.add(new Float(image.floating().equals("left"), Math.min(x, boxX), top, cy, Math.max(w, captionWidth)));
             } else {
-                y = top + h + (float) (0.5 * em);
+                y = cy + (float) (0.5 * em);
             }
             empty = false;
         }
         // --8<-- [end:picture]
+
+        private boolean moved(int offset) {
+            for (int[] range : moved) {
+                if (offset >= range[0] && offset <= range[1]) return true;
+            }
+            return false;
+        }
+
+        private float lineHeight(TextLayout l) {
+            return (l.getAscent() + l.getDescent()) * (float) appearance.lineSpacing();
+        }
+
+        /** A caption broken into centred lines of at most the width, without hyphenation. */
+        private List<TextLayout> captionLines(Block.Text caption, float lineWidth) {
+            List<TextLayout> result = new ArrayList<>();
+            if (caption.length() == 0) return result;
+            LineBreakMeasurer measurer = new LineBreakMeasurer(attributed(caption).getIterator(), FRC);
+            while (measurer.getPosition() < caption.length()) {
+                result.add(measurer.nextLayout(Math.max(lineWidth, em)));
+            }
+            return result;
+        }
 
         private void rule(Block.Rule rule) {
             space(rule.spaceBefore());
@@ -273,7 +340,9 @@ public final class Typesetter {
                     line = measured;
                     float x = e[0] + indent;
                     TextLayout layout = line.layout;
-                    if (!last && line.end < limit && justified(block)) layout = layout.getJustifiedLayout(available);
+                    if (!last && line.end < limit && justified(block)) {
+                        layout = justify(attributed, pos, line.end, line.hyphen ? "-" : null, available);
+                    }
                     float visible = layout.getVisibleAdvance();
                     if (block.align().equals("center")) x += (available - visible) / 2;
                     else if (block.align().equals("right")) x += available - visible;
@@ -328,6 +397,11 @@ public final class Typesetter {
         int end = measurer.nextOffset(available, limit, false);
         if (end <= pos) end = Math.min(limit, pos + 1);
         String text = block.text();
+        // Java may break after the apostrophe in "I’ve"; the word goes to the next line as a whole
+        if (end < limit && end - 1 > pos && "’'".indexOf(text.charAt(end - 1)) >= 0 && Character.isLetter(text.charAt(end))) {
+            int space = text.lastIndexOf(' ', end - 1);
+            if (space >= pos) end = space + 1;
+        }
         if (hyphenator.isPresent() && end < limit && Character.isLetter(text.charAt(end))) {
             int wordEnd = end;
             while (wordEnd < limit && Character.isLetter(text.charAt(wordEnd))) wordEnd++;
@@ -345,6 +419,18 @@ public final class Typesetter {
         return new Placed(new TextLayout(sub(attributed, pos, end, null).getIterator(), FRC), end, false);
     }
     // --8<-- [end:line]
+
+    // --8<-- [start:justify]
+    /**
+     * The line set to the full width. Java's justification counts glyphs where it means characters, so after a
+     * ligature such as "fl" it would widen the wrong gaps; justified lines are therefore set without ligatures.
+     */
+    private static TextLayout justify(AttributedString attributed, int from, int to, String suffix, float width) {
+        AttributedString text = sub(attributed, from, to, suffix);
+        text.addAttribute(TextAttribute.LIGATURES, 0);
+        return new TextLayout(text.getIterator(), FRC).getJustifiedLayout(width);
+    }
+    // --8<-- [end:justify]
 
     /** Characters {@code from} to {@code to} with their attributes, and a suffix in the style of the last one. */
     static AttributedString sub(AttributedString whole, int from, int to, String suffix) {
