@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=amadeOS Books
+Name[de]=amadeOS Bücher
+Name[fr]=amadeOS Livres
+Name[es]=amadeOS Libros
+Name[it]=amadeOS Libri
+GenericName=E-Book Reader
+GenericName[de]=E-Book-Leser
+GenericName[fr]=Lecteur de livres numériques
+GenericName[es]=Lector de libros electrónicos
+GenericName[it]=Lettore di libri elettronici
+Comment=Read EPUB books and CBZ comics on a bookshelf of your own
+Comment[de]=EPUB-Bücher und CBZ-Comics in einem eigenen Bücherregal lesen
+Comment[fr]=Lire des livres EPUB et des BD CBZ dans votre propre bibliothèque
+Comment[es]=Leer libros EPUB y cómics CBZ en una estantería propia
+Comment[it]=Leggere libri EPUB e fumetti CBZ in una libreria tutta propria
+Icon=amade-books
+Exec=/usr/bin/amade-books %U
+Terminal=false
+Categories=Office;Viewer;
+MimeType=application/epub+zip;application/vnd.comicbook+zip;application/x-cbz;
+Keywords=epub;ebook;book;comic;manga;cbz;reader;library;Buch;Bücher;Leser;
+StartupNotify=true
