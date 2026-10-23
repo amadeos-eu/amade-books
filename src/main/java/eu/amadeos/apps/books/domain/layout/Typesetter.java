@@ -127,6 +127,7 @@ public final class Typesetter {
             for (Figure figure : waiting) picture(figure, true);
         }
 
+        // --8<-- [start:finish]
         private void finishPage() {
             if (empty && lines.isEmpty() && placed.isEmpty() && rules.isEmpty()) return;
             int start = Integer.MAX_VALUE;
@@ -153,6 +154,7 @@ public final class Typesetter {
             rules = new ArrayList<>();
             empty = true;
         }
+        // --8<-- [end:finish]
 
         private void space(double before) {
             if (!empty) y += (float) (before * em);

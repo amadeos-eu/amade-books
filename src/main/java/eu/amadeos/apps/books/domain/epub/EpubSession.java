@@ -148,6 +148,7 @@ public final class EpubSession implements AutoCloseable {
         return lengths != null;
     }
 
+    // --8<-- [start:progress]
     /** How far into the book the position is, from 0 to 1. */
     public double progress(Position position) {
         int[] l = lengths();
@@ -161,6 +162,7 @@ public final class EpubSession implements AutoCloseable {
         before += Math.min(position.offset(), l[chapter]);
         return total == 0 ? 0 : Math.min(1, (double) before / total);
     }
+    // --8<-- [end:progress]
 
     /** The position at a fraction of the book, for the progress bar. */
     public Position at(double fraction) {
