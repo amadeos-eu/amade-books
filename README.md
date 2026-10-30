@@ -1,6 +1,6 @@
 # amade-books
 
-**amade-books** is the e-book and comic reader of the [amadeOS](https://github.com/datazuul/amadeos) desktop: a bookshelf with covers, EPUB books set into pages by its own small typesetter, and CBZ comics with double pages and right-to-left reading for manga, in one Motif window.
+**amade-books** is the e-book and comic reader of the [amadeOS](https://github.com/amadeos-eu/amadeos) desktop: a bookshelf with covers, EPUB books set into pages by its own small typesetter, and CBZ comics with double pages and right-to-left reading for manga, in one Motif window.
 
 ![License](https://img.shields.io/badge/license-EUPL--1.2-blue)
 ![Java](https://img.shields.io/badge/Java-25-orange)
@@ -22,7 +22,7 @@
 - **Full screen** (F11) without toolbar and status bar; Esc leaves it.
 - **Reading position** of every book, its bookmarks and collections in `~/.local/share/amadeos/books/library.json`; settings in `~/.config/amadeos/books/books.properties`; cover thumbnails in `~/.cache/amadeos/books/`.
 - Five languages (English, Deutsch, Français, Español, Italiano), following the amadeOS desktop language; *Options → Language* overrides it.
-- Theme colours and Motif look from [amade-commons](https://github.com/datazuul/amade-commons).
+- Theme colours and Motif look from [amade-commons](https://github.com/amadeos-eu/amade-commons).
 
 ## Why an own typesetter
 
