@@ -59,8 +59,8 @@
     <category>Office</category>
     <category>Viewer</category>
   </categories>
-  <url type="homepage">https://github.com/datazuul/amade-books</url>
-  <url type="bugtracker">https://github.com/datazuul/amade-books/issues</url>
+  <url type="homepage">https://github.com/amadeos-eu/amade-books</url>
+  <url type="bugtracker">https://github.com/amadeos-eu/amade-books/issues</url>
   <developer id="eu.amadeos">
     <name>amadeOS Project</name>
   </developer>
@@ -72,7 +72,7 @@
       <caption xml:lang="fr">La bibliothèque avec les couvertures et les étagères</caption>
       <caption xml:lang="es">La biblioteca con portadas y estantes</caption>
       <caption xml:lang="it">La biblioteca con copertine e scaffali</caption>
-      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books.png</image>
+      <image>https://raw.githubusercontent.com/amadeos-eu/amade-books/main/docs/screenshots/amade-books.png</image>
     </screenshot>
     <screenshot>
       <caption>A book on two pages with its table of contents</caption>
@@ -80,7 +80,7 @@
       <caption xml:lang="fr">Un livre sur deux pages avec sa table des matières</caption>
       <caption xml:lang="es">Un libro en dos páginas con su índice</caption>
       <caption xml:lang="it">Un libro su due pagine con il suo indice</caption>
-      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books-reader.png</image>
+      <image>https://raw.githubusercontent.com/amadeos-eu/amade-books/main/docs/screenshots/amade-books-reader.png</image>
     </screenshot>
     <screenshot>
       <caption>Night colours and the appearance</caption>
@@ -88,7 +88,7 @@
       <caption xml:lang="fr">Couleurs de nuit et l’apparence</caption>
       <caption xml:lang="es">Colores de noche y la apariencia</caption>
       <caption xml:lang="it">Colori notte e l’aspetto</caption>
-      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books-night.png</image>
+      <image>https://raw.githubusercontent.com/amadeos-eu/amade-books/main/docs/screenshots/amade-books-night.png</image>
     </screenshot>
     <screenshot>
       <caption>A manga, two pages read from right to left</caption>
@@ -96,7 +96,7 @@
       <caption xml:lang="fr">Un manga, deux pages lues de droite à gauche</caption>
       <caption xml:lang="es">Un manga, dos páginas leídas de derecha a izquierda</caption>
       <caption xml:lang="it">Un manga, due pagine lette da destra a sinistra</caption>
-      <image>https://raw.githubusercontent.com/datazuul/amade-books/main/docs/screenshots/amade-books-comic.png</image>
+      <image>https://raw.githubusercontent.com/amadeos-eu/amade-books/main/docs/screenshots/amade-books-comic.png</image>
     </screenshot>
   </screenshots>
 
