@@ -5,7 +5,7 @@ import eu.amadeos.apps.books.domain.BookInfo;
 import eu.amadeos.apps.books.domain.comic.ComicBook;
 import eu.amadeos.apps.books.domain.epub.EpubBook;
 import eu.amadeos.apps.books.domain.epub.EpubSession;
-import eu.amadeos.apps.books.domain.layout.Hyphenators;
+import eu.amadeos.commons.typeset.Hyphenators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

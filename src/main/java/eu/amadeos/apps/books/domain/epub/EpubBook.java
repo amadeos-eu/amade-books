@@ -1,5 +1,6 @@
 package eu.amadeos.apps.books.domain.epub;
 
+import eu.amadeos.commons.typeset.ZipPaths;
 import eu.amadeos.apps.books.domain.BookFormat;
 import eu.amadeos.apps.books.domain.BookInfo;
 import org.jsoup.Jsoup;

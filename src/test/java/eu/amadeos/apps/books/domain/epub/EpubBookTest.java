@@ -1,5 +1,6 @@
 package eu.amadeos.apps.books.domain.epub;
 
+import eu.amadeos.commons.typeset.ZipPaths;
 import eu.amadeos.apps.books.TestBooks;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;

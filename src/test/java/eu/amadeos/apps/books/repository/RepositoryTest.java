@@ -6,7 +6,7 @@ import eu.amadeos.apps.books.domain.ComicFit;
 import eu.amadeos.apps.books.domain.Position;
 import eu.amadeos.apps.books.domain.ReadTheme;
 import eu.amadeos.apps.books.domain.Settings;
-import eu.amadeos.apps.books.domain.layout.Appearance;
+import eu.amadeos.commons.typeset.Appearance;
 import eu.amadeos.apps.books.domain.library.BookState;
 import eu.amadeos.apps.books.domain.library.Bookmark;
 import eu.amadeos.apps.books.domain.library.LibraryEntry;

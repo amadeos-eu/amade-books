@@ -11,13 +11,13 @@ import eu.amadeos.apps.books.domain.comic.Spreads;
 import eu.amadeos.apps.books.domain.epub.EpubBook;
 import eu.amadeos.apps.books.domain.epub.EpubSession;
 import eu.amadeos.apps.books.domain.epub.TocEntry;
-import eu.amadeos.apps.books.domain.layout.Appearance;
-import eu.amadeos.apps.books.domain.layout.ChapterLayout;
-import eu.amadeos.apps.books.domain.layout.ChapterText;
-import eu.amadeos.apps.books.domain.layout.Hyphenators;
-import eu.amadeos.apps.books.domain.layout.Page;
-import eu.amadeos.apps.books.domain.layout.PageGeometry;
-import eu.amadeos.apps.books.domain.layout.RunStyle;
+import eu.amadeos.commons.typeset.Appearance;
+import eu.amadeos.commons.typeset.ChapterLayout;
+import eu.amadeos.commons.typeset.ChapterText;
+import eu.amadeos.commons.typeset.Hyphenators;
+import eu.amadeos.commons.typeset.Page;
+import eu.amadeos.commons.typeset.PageGeometry;
+import eu.amadeos.commons.typeset.RunStyle;
 import eu.amadeos.apps.books.domain.library.BookState;
 import eu.amadeos.apps.books.domain.library.Bookmark;
 import eu.amadeos.apps.books.domain.library.LibraryEntry;
@@ -769,7 +769,7 @@ public final class MainPresenter {
         Optional<RunStyle> link = epub.text(clickedChapter).linkAt(offset);
         if (link.isEmpty()) return false;
         String target = link.get().link();
-        if (eu.amadeos.apps.books.domain.epub.ZipPaths.external(target)) {
+        if (eu.amadeos.commons.typeset.ZipPaths.external(target)) {
             try {
                 launcher.browse(target);
             } catch (IOException e) {

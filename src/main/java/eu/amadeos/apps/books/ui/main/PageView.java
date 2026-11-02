@@ -2,12 +2,12 @@ package eu.amadeos.apps.books.ui.main;
 
 import eu.amadeos.apps.books.domain.ReadTheme;
 import eu.amadeos.apps.books.domain.epub.EpubSession;
-import eu.amadeos.apps.books.domain.layout.Block;
-import eu.amadeos.apps.books.domain.layout.ChapterLayout;
-import eu.amadeos.apps.books.domain.layout.ChapterText;
-import eu.amadeos.apps.books.domain.layout.Page;
-import eu.amadeos.apps.books.domain.layout.PageGeometry;
-import eu.amadeos.apps.books.domain.layout.StyledRun;
+import eu.amadeos.commons.typeset.Block;
+import eu.amadeos.commons.typeset.ChapterLayout;
+import eu.amadeos.commons.typeset.ChapterText;
+import eu.amadeos.commons.typeset.Page;
+import eu.amadeos.commons.typeset.PageGeometry;
+import eu.amadeos.commons.typeset.StyledRun;
 
 import javax.swing.JComponent;
 import java.awt.AlphaComposite;

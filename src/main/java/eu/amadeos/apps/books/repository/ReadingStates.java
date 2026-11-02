@@ -2,7 +2,7 @@ package eu.amadeos.apps.books.repository;
 
 import com.google.inject.Inject;
 import eu.amadeos.apps.books.domain.Position;
-import eu.amadeos.apps.books.domain.layout.Appearance;
+import eu.amadeos.commons.typeset.Appearance;
 import eu.amadeos.apps.books.domain.library.BookState;
 import eu.amadeos.apps.books.domain.library.Bookmark;
 import eu.amadeos.commons.config.XdgDirectories;

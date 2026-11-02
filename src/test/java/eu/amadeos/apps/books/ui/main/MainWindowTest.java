@@ -3,8 +3,8 @@ package eu.amadeos.apps.books.ui.main;
 import eu.amadeos.apps.books.OnEdt;
 import eu.amadeos.apps.books.TestBooks;
 import eu.amadeos.apps.books.domain.ReadTheme;
-import eu.amadeos.apps.books.domain.layout.Hyphenators;
-import eu.amadeos.apps.books.domain.layout.Page;
+import eu.amadeos.commons.typeset.Hyphenators;
+import eu.amadeos.commons.typeset.Page;
 import eu.amadeos.apps.books.repository.BooksPreferences;
 import eu.amadeos.apps.books.repository.LibraryCache;
 import eu.amadeos.apps.books.repository.ReadingStates;
@@ -159,8 +159,8 @@ class MainWindowTest {
 
     private static int topOfText(PageView pages) {
         // the geometry the presenter chose for this size
-        return eu.amadeos.apps.books.domain.layout.PageGeometry.of(pages.getWidth(), pages.getHeight(), true,
-                eu.amadeos.apps.books.domain.layout.Appearance.DEFAULT).textTop();
+        return eu.amadeos.commons.typeset.PageGeometry.of(pages.getWidth(), pages.getHeight(), true,
+                eu.amadeos.commons.typeset.Appearance.DEFAULT).textTop();
     }
 
     @Test

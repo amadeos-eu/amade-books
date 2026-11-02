@@ -1,7 +1,7 @@
 package eu.amadeos.apps.books.ui.main;
 
 import eu.amadeos.apps.books.domain.ReadTheme;
-import eu.amadeos.apps.books.domain.layout.Appearance;
+import eu.amadeos.commons.typeset.Appearance;
 import eu.amadeos.commons.i18n.Messages;
 import eu.amadeos.commons.i18n.Mnemonics;
 import eu.amadeos.commons.swing.AmadeUI;

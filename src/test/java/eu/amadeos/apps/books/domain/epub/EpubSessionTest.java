@@ -2,9 +2,9 @@ package eu.amadeos.apps.books.domain.epub;
 
 import eu.amadeos.apps.books.TestBooks;
 import eu.amadeos.apps.books.domain.Position;
-import eu.amadeos.apps.books.domain.layout.Appearance;
-import eu.amadeos.apps.books.domain.layout.ChapterLayout;
-import eu.amadeos.apps.books.domain.layout.Hyphenators;
+import eu.amadeos.commons.typeset.Appearance;
+import eu.amadeos.commons.typeset.ChapterLayout;
+import eu.amadeos.commons.typeset.Hyphenators;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
