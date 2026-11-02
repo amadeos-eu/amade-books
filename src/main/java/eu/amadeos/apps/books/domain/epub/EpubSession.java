@@ -1,13 +1,14 @@
 package eu.amadeos.apps.books.domain.epub;
 
+import eu.amadeos.commons.typeset.ZipPaths;
 import eu.amadeos.apps.books.domain.Position;
-import eu.amadeos.apps.books.domain.layout.Appearance;
-import eu.amadeos.apps.books.domain.layout.ChapterLayout;
-import eu.amadeos.apps.books.domain.layout.ChapterParser;
-import eu.amadeos.apps.books.domain.layout.ChapterText;
-import eu.amadeos.apps.books.domain.layout.Css;
-import eu.amadeos.apps.books.domain.layout.Hyphenators;
-import eu.amadeos.apps.books.domain.layout.Typesetter;
+import eu.amadeos.commons.typeset.Appearance;
+import eu.amadeos.commons.typeset.ChapterLayout;
+import eu.amadeos.commons.typeset.ChapterParser;
+import eu.amadeos.commons.typeset.ChapterText;
+import eu.amadeos.commons.typeset.Css;
+import eu.amadeos.commons.typeset.Hyphenators;
+import eu.amadeos.commons.typeset.Typesetter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

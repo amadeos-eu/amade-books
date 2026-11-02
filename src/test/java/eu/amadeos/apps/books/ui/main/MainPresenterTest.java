@@ -6,7 +6,7 @@ import eu.amadeos.apps.books.bootstrap.BooksModule;
 import eu.amadeos.apps.books.domain.ComicFit;
 import eu.amadeos.apps.books.domain.Position;
 import eu.amadeos.apps.books.domain.ReadTheme;
-import eu.amadeos.apps.books.domain.layout.Hyphenators;
+import eu.amadeos.commons.typeset.Hyphenators;
 import eu.amadeos.apps.books.domain.library.LibraryEntry;
 import eu.amadeos.apps.books.domain.library.ShelfFilter;
 import eu.amadeos.apps.books.domain.library.SortOrder;

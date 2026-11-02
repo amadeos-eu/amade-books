@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
 import com.google.inject.Singleton;
-import eu.amadeos.apps.books.domain.layout.Hyphenators;
+import eu.amadeos.commons.typeset.Hyphenators;
 import eu.amadeos.apps.books.repository.BooksPreferences;
 import eu.amadeos.apps.books.repository.LibraryCache;
 import eu.amadeos.apps.books.repository.LibraryFolder;

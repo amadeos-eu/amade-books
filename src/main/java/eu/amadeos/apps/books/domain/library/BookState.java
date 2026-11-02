@@ -1,7 +1,7 @@
 package eu.amadeos.apps.books.domain.library;
 
 import eu.amadeos.apps.books.domain.Position;
-import eu.amadeos.apps.books.domain.layout.Appearance;
+import eu.amadeos.commons.typeset.Appearance;
 
 import java.util.ArrayList;
 import java.util.Comparator;

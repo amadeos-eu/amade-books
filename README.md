@@ -30,14 +30,13 @@ EPUB books are XHTML and CSS. A browser engine (JavaFX WebView, a Chromium) woul
 
 ## Architecture
 
-Java 25, Swing and Guice; start-up, theme and language come from `AmadeApplication` in amade-commons.
+Java 25, Swing and Guice; start-up, theme and language come from `AmadeApplication` in amade-commons. The typesetter (`Css`, `Style`, `ChapterParser`, `Typesetter`, `Hyphenator`, `PageGeometry`, `Appearance`, `Page`, `ChapterLayout`, `ZipPaths`) lives in amade-commons as `eu.amadeos.commons.typeset`, because the Book Editor shows its preview with it.
 
 | Package | Contents |
 |---|---|
 | `bootstrap` | `AmadeBooksApplication`, `BooksModule` |
 | `domain` | `BookInfo`, `BookFormat`, `Position`, `ReadTheme`, `ComicFit`, `Settings` |
-| `domain.epub` | `EpubBook` (container, package document, navigation, NCX), `EpubSession` (chapter texts and layouts with caches, progress, links, footnotes, pictures, fonts, search), `ZipPaths` |
-| `domain.layout` | `Css`, `Style`, `ChapterParser` (XHTML to blocks), `Typesetter` (blocks to pages), `Hyphenator`, `PageGeometry`, `Appearance`, `Page`, `ChapterLayout` |
+| `domain.epub` | `EpubBook` (container, package document, navigation, NCX), `EpubSession` (chapter texts and layouts with caches, progress, links, footnotes, pictures, fonts, search) |
 | `domain.comic` | `ComicBook`, `ComicSession`, `Spreads`, `NaturalOrder` |
 | `domain.library` | `LibraryScanner`, `Shelf` (facets, filters, sorting), `BookState`, `Bookmark`, `LibraryEntry` |
 | `repository` | `BooksPreferences`, `ReadingStates`, `LibraryCache` |
