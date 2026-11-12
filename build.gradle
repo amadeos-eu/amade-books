@@ -122,7 +122,7 @@ Section: text
 Recommends: hyphen-en-us, hyphen-de, hyphen-fr, hyphen-it, hyphen-es
 Priority: optional
 Architecture: all
-Depends: openjdk-25-jre | java-runtime (>= 25)
+Depends: openjdk-25-jre | java-runtime (>= 25), amadeos-java-options
 Maintainer: amadeOS Project <developers@datazuul.com>
 Description: E-book reader for amadeOS
  Reads EPUB books and CBZ comics. A library shelf with covers, reading
